@@ -25,4 +25,33 @@ public class AddCalcOneTwoEmpty {
 
     }
 
+    @Test
+    public void Suma_dos_numeros_calculadora () {
+        Calc suma = new Calc();
+        String numberEnt = "5.0    3.1  ";
+        String resultado1 = suma.AddStrings(numberEnt);
+        String expected = "8.1";
+        Assert.assertEquals(resultado1, expected);
+
+    }
+
+    @Test
+    public void Suma_N_numeros_calculadora () {
+        Calc suma = new Calc();
+        String numberEnt = "5.0    3.1  6.1  9.1  111.12  3000.10";
+        String resultado1 = suma.AddStrings(numberEnt);
+        String expected = "3134.52";
+        Assert.assertEquals(resultado1, expected);
+
+    }
+
+    @Test
+    public void Suma_N_numeros_separados_comas_calculadora () {
+        Calc suma = new Calc();
+        String numberEnt = "5.0,3.1,6.1,9.1,111.12,3000.10";
+        String resultado1 = suma.AddStrings(numberEnt);
+        String expected = "3134.52";
+        Assert.assertEquals(resultado1, expected);
+
+    }
 }
