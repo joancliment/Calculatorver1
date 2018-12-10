@@ -36,6 +36,17 @@ public class AddCalcOneTwoEmpty {
     }
 
     @Test
+    public void Suma_dos_numeros_sin_dec_calculadora () {
+        Calc suma = new Calc();
+        String numberEnt = "5    3  ";
+        String resultado1 = suma.AddStrings(numberEnt);
+        String expected = "8";
+        Assert.assertEquals(resultado1, expected);
+
+    }
+
+
+    @Test
     public void Suma_N_numeros_calculadora () {
         Calc suma = new Calc();
         String numberEnt = "5.0    3.1  6.1  9.1  111.12  3000.10";
