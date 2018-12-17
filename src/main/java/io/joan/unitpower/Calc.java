@@ -20,21 +20,13 @@ public class Calc {
         return resultado;
     }
 
-    public static boolean isDecimal(String cadena, int NumPunto) {
+    public static boolean isDecimal(String cadena) {
 
         boolean Resultado = false;
 
         if (cadena.contains(".") == true) {
-            NumPunto++;
-
-            if (NumPunto > 1) {
-                Resultado = false;
-            } else {
-                if (NumPunto == 1) {
-                    Resultado = true;
-                } else Resultado = false;
-            }
-        }
+            Resultado = true;
+        } else Resultado = false;
 
 
         return Resultado;
@@ -130,7 +122,8 @@ public class Calc {
                         zok = z;
                         y++;
                     } else {
-                        if (isDecimal((numberEnt.substring(y, z)), NumPuntos)) {
+                        if (isDecimal((numberEnt.substring(y, z)))) {
+                            NumPuntos ++;
                             zok = z;
                             y++;
                         } else {
@@ -141,10 +134,12 @@ public class Calc {
 
                 }
 
-                if (hay_numero == true) {
-                    NumN.add(numberEnt.substring(yok, zok));
-                    zAnt = zAct + 1;
-                    x = z;
+            
+                if ((hay_numero == true) && (NumPuntos == 0 || NumPuntos == 1)) {
+                     NumN.add(numberEnt.substring(yok, zok));
+                     zAnt = zAct + 1;
+                      x = z;
+
                 } else {
                     zAnt = zAct + 1;
                     x = z;
@@ -160,4 +155,5 @@ public class Calc {
     }
 
 }
+
 
