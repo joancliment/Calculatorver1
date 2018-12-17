@@ -20,6 +20,64 @@ public class Calc {
         return resultado;
     }
 
+    public static boolean isDecimal(String cadena, int NumPunto) {
+
+        boolean Resultado = false;
+
+        if (cadena.contains(".") == true) {
+            NumPunto++;
+
+            if (NumPunto > 1) {
+                Resultado = false;
+            } else {
+                if (NumPunto == 1) {
+                    Resultado = true;
+                } else Resultado = false;
+            }
+        }
+
+
+        return Resultado;
+    }
+
+    public static String NumberExit(List<String> NumN1) {
+
+
+        boolean hay_decimales = false;
+        double NumberSal1 = 0;
+        int NumberSal2 = 0;
+
+        String Salida1 = "";
+
+
+        hay_decimales = false;
+        NumberSal1 = 0.0;
+        NumberSal2 = 0;
+
+        for (int i = 0; (i <= NumN1.size() - 1); i++) {
+            if ((NumN1.get(i).contains("."))) {
+                hay_decimales = true;
+                    NumberSal1 = Double.valueOf(NumN1.get(i)) + NumberSal1;
+            } else {
+                NumberSal2 = Integer.valueOf(NumN1.get(i)) + NumberSal2;
+            }
+
+        }
+
+
+        if (hay_decimales) {
+
+            NumberSal1 = NumberSal1 + NumberSal2;
+            Salida1 = String.valueOf(NumberSal1);
+        } else {
+            Salida1 = String.valueOf(NumberSal2);
+        }
+
+        return Salida1;
+
+    }
+
+
     public String AddStrings(String numberEnt) {
 
         /*   String NumN []; */
@@ -37,51 +95,49 @@ public class Calc {
         int long1 = 0;
         int zAct = 1;
         int zAnt = 2;
-        double NumberSal1 = 0;
-        int NumberSal2 = 0;
+        int NumPuntos = 0;
+
         boolean hay_numero = false;
-        boolean hay_decimales = false;
-        String Salida1 = "";
+        String SalidaN = "";
 
-        String[ ] lista1 = numberEnt.split("\\.");
+        String[] lista1 = numberEnt.split("\\.");
 
 
-        boolean empty; if (numberEnt.isEmpty()) empty = true;
+        boolean empty;
+        if (numberEnt.isEmpty()) empty = true;
         else empty = false;
 
         if (empty) {
             return "";
-        } else
-        {
+        } else {
             long1 = (numberEnt.length());
 
             x = 0;
 
-            while (x < long1 )
-            {
+            while (x < long1) {
                 hay_numero = false;
                 y = x;
                 yok = x;
                 zok = x;
+                NumPuntos = 0;
 
-                while (y < long1 && zAct < zAnt ) {
+                while (y < long1 && zAct < zAnt) {
 
                     z = y + 1;
 
                     if (isNumeric((numberEnt.substring(y, z))) == true) {
                         hay_numero = true;
                         zok = z;
-                        y = y + 1;
+                        y++;
                     } else {
-                        if (((numberEnt.substring(y, z)).contains(".")) == true)
-                        {
-                          zok = z;
-                          y = y + 1;
+                        if (isDecimal((numberEnt.substring(y, z)), NumPuntos)) {
+                            zok = z;
+                            y++;
                         } else {
-                                zAct = zAnt + 1;
-                               }
-
+                            zAct = zAnt + 1;
                         }
+
+                    }
 
                 }
 
@@ -95,36 +151,13 @@ public class Calc {
                 }
             }
 
-            hay_decimales = false;
-            NumberSal1 = 0.0;
-            NumberSal2 = 0;
+            SalidaN = NumberExit(NumN);
 
-            for (int i = 0; (i <= NumN.size() - 1); i++) {
-                if ((NumN.get(i).contains("."))) {
-                    hay_decimales = true;
-                    NumberSal1 = Double.valueOf(NumN.get(i)) + NumberSal1;
-                }
-                else {
-                    NumberSal2 = Integer.valueOf(NumN.get(i)) + NumberSal2;
-                }
+            return SalidaN;
 
-            }
         }
-
-        if (hay_decimales) {
-
-            NumberSal1 = NumberSal1 + NumberSal2;
-            Salida1 = String.valueOf(NumberSal1);
-        }
-        else
-        {
-            Salida1 = String.valueOf(NumberSal2);
-        }
-
-        return Salida1;
 
     }
-
 
 }
 
