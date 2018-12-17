@@ -20,15 +20,41 @@ public class Calc {
         return resultado;
     }
 
-    public static boolean isDecimal(String cadena) {
+    public static boolean ComprobarDecyPunt(String cadena) {
 
         boolean Resultado = false;
+        boolean NegativoOk = false;
+        int NumPuntos = 0;
+        int NumSigNeg = 0;
+        int k=0;
 
-        if (cadena.contains(".") == true) {
-            Resultado = true;
-        } else Resultado = false;
+        for (int j = 0; k < cadena.length(); j++) {
+            k = j + 1;
 
+            if (cadena.substring(j, k).contains(".")) {
+                NumPuntos++;
+            }
 
+            if (cadena.substring(j, k).contains("-")) {
+                if (j==0) {
+                    NegativoOk = true;
+                }
+                NumSigNeg++;
+            }
+
+        }
+
+        Resultado = true;
+
+        if (NumPuntos > 1) {
+            Resultado = false;
+        } else {
+            if (NegativoOk) {
+                if (NumSigNeg > 1) {
+                    Resultado = false;
+                }
+            }
+        }
         return Resultado;
     }
 
@@ -87,7 +113,6 @@ public class Calc {
         int long1 = 0;
         int zAct = 1;
         int zAnt = 2;
-        int NumPuntos = 0;
 
         boolean hay_numero = false;
         String SalidaN = "";
@@ -111,7 +136,6 @@ public class Calc {
                 y = x;
                 yok = x;
                 zok = x;
-                NumPuntos = 0;
 
                 while (y < long1 && zAct < zAnt) {
 
@@ -122,8 +146,7 @@ public class Calc {
                         zok = z;
                         y++;
                     } else {
-                        if (isDecimal((numberEnt.substring(y, z)))) {
-                            NumPuntos ++;
+                        if (((numberEnt.substring(y, z)).contains(".") == true) || ((numberEnt.substring(y, z)).contains("-") == true)) {
                             zok = z;
                             y++;
                         } else {
@@ -134,8 +157,12 @@ public class Calc {
 
                 }
 
-            
-                if ((hay_numero == true) && (NumPuntos == 0 || NumPuntos == 1)) {
+                if (hay_numero) {
+                    hay_numero = ComprobarDecyPunt(numberEnt.substring(yok, zok));
+                }
+
+
+                if (hay_numero == true)  {
                      NumN.add(numberEnt.substring(yok, zok));
                      zAnt = zAct + 1;
                       x = z;
