@@ -55,6 +55,25 @@ public class CalcTest {
 
     }
 
+    @Test
+    public void Suma_dos_numeros_con_Neg_mal_calculadora () {
+        Calc sut = new Calc();
+        String numberEnt = "5.0  -1-11   3.0";
+        String actual = sut.AddStrings(numberEnt);
+        String expected = "8.0";
+        Assert.assertEquals(actual, expected);
+
+    }
+
+    @Test
+    public void Suma_dos_numeros_con_Neg_ok_calculadora () {
+        Calc sut = new Calc();
+        String numberEnt = "5.0  -1.01   3.0";
+        String actual = sut.AddStrings(numberEnt);
+        String expected = "6.99";
+        Assert.assertEquals(actual, expected);
+
+    }
 
 
     @Test
