@@ -7,43 +7,54 @@ public class CalcTest {
 
     @Test
     public void Suma_vacio_calculadora () {
-        Calc suma = new Calc();
+        Calc sut = new Calc();
         String numberEnt = "";
-        String resultado1 = suma.AddStrings(numberEnt);
+        String actual = sut.AddStrings(numberEnt);
         String expected = "";
-        Assert.assertEquals(resultado1, expected);
+        Assert.assertEquals(actual, expected);
 
     }
 
     @Test
     public void Suma_un_numero_calculadora () {
-        Calc suma = new Calc();
+        Calc sut = new Calc();
         String numberEnt = "5.0";
-        String resultado1 = suma.AddStrings(numberEnt);
+        String actual = sut.AddStrings(numberEnt);
         String expected = "5.0";
-        Assert.assertEquals(resultado1, expected);
+        Assert.assertEquals(actual, expected);
 
     }
 
     @Test
     public void Suma_dos_numeros_calculadora () {
-        Calc suma = new Calc();
+        Calc sut = new Calc();
         String numberEnt = "5.0    3.1  ";
-        String resultado1 = suma.AddStrings(numberEnt);
+        String actual = sut.AddStrings(numberEnt);
         String expected = "8.1";
-        Assert.assertEquals(resultado1, expected);
+        Assert.assertEquals(actual, expected);
 
     }
 
     @Test
     public void Suma_dos_numeros_sin_dec_calculadora () {
-        Calc suma = new Calc();
+        Calc sut = new Calc();
         String numberEnt = "5    3  ";
-        String resultado1 = suma.AddStrings(numberEnt);
+        String actual = sut.AddStrings(numberEnt);
         String expected = "8";
-        Assert.assertEquals(resultado1, expected);
+        Assert.assertEquals(actual, expected);
 
     }
+
+    @Test
+    public void Suma_dos_numeros_con_dec_mal_calculadora () {
+        Calc sut = new Calc();
+        String numberEnt = "5.0  1..11   3.0";
+        String actual = sut.AddStrings(numberEnt);
+        String expected = "8.0";
+        Assert.assertEquals(actual, expected);
+
+    }
+
 
 
     @Test
